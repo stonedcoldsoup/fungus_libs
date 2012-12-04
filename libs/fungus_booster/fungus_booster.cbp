@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="fungus_booster" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option extended_obj_names="1" />
+		<Build>
+			<Target title="debug win32">
+				<Option output="mingw32\lib\fungus_booster_d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="mingw32\obj\d\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-DFUNGUSCONCURRENCY_NO_INLINE" />
+					<Add option="-DDLL_FUNGUSUTIL" />
+				</Compiler>
+				<Linker>
+					<Add library="user32" />
+					<Add library="ws2_32" />
+					<Add library="winmm" />
+					<Add library="vmime" />
+				</Linker>
+			</Target>
+			<Target title="debug linux32 shared">
+				<Option output="gcc\lib\fungus_booster_d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gcc\obj\so\d\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-fvisibility=hidden" />
+					<Add option="-DFUNGUSCONCURRENCY_NO_INLINE" />
+					<Add option="-DSO_FUNGUSUTIL" />
+				</Compiler>
+				<Linker>
+					<Add option="-fvisibility=hidden" />
+					<Add option="-lenet" />
+					<Add option="-lvmime" />
+					<Add option="-pthread" />
+				</Linker>
+			</Target>
+			<Target title="debug linux32 static">
+				<Option output="gcc\lib\libfungus_booster_d" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="gcc\obj\static\d\" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-DFUNGUSCONCURRENCY_NO_INLINE" />
+				</Compiler>
+			</Target>
+			<Target title="release win32">
+				<Option output="mingw32\lib\fungus_booster" prefix_auto="1" extension_auto="1" />
+				<Option object_output="mingw32\obj\r\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
+					<Add option="-Wall" />
+					<Add option="-DDLL_FUNGUSUTIL" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+					<Add library="ws2_32" />
+					<Add library="winmm" />
+					<Add library="vmime" />
+				</Linker>
+			</Target>
+			<Target title="release linux32 shared">
+				<Option output="gcc\lib\fungus_booster" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gcc\obj\so\r\" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
+					<Add option="-Wall" />
+					<Add option="-fvisibility=hidden" />
+					<Add option="-DSO_FUNGUSUTIL" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-fvisibility=hidden" />
+					<Add option="-lenet" />
+					<Add option="-lvmime" />
+					<Add option="-pthread" />
+				</Linker>
+			</Target>
+			<Target title="release linux32 static">
+				<Option output="gcc\lib\libfungus_booster" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="gcc\obj\static\r\" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
+					<Add option="-Wall" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<VirtualTargets>
+			<Add alias="linux32" targets="debug linux32 shared;debug linux32 static;release linux32 shared;release linux32 static;" />
+			<Add alias="win32" targets="debug win32;release win32;" />
+		</VirtualTargets>
+		<Compiler>
+			<Add option="-std=c++0x" />
+			<Add option="-Wall" />
+			<Add option="-DBUILD_FUNGUSUTIL" />
+			<Add option="-DBUILD_FUNGUSCONCURRENCY" />
+			<Add option="-DBUILD_FUNGUSNET" />
+			<Add option="-DBUILD_FUNGUSMAIL" />
+			<Add directory="..\fungus_booster" />
+			<Add directory="fungus_concurrency" />
+			<Add directory="fungus_net" />
+			<Add directory="fungus_util" />
+		</Compiler>
+		<Unit filename="fungus_booster.h" />
+		<Unit filename="fungus_concurrency\communication.cpp" />
+		<Unit filename="fungus_concurrency\fungus_concurrency.h" />
+		<Unit filename="fungus_concurrency\fungus_concurrency_comm_internal.h" />
+		<Unit filename="fungus_concurrency\fungus_concurrency_common.h" />
+		<Unit filename="fungus_concurrency\fungus_concurrency_communication.h" />
+		<Unit filename="fungus_concurrency\fungus_concurrency_concurrent_auto_ptr.h" />
+		<Unit filename="fungus_concurrency\fungus_concurrency_concurrent_queue.h" />
+		<Unit filename="fungus_concurrency\fungus_concurrency_process.h" />
+		<Unit filename="fungus_concurrency\process.cpp" />
+		<Unit filename="fungus_net\authenticator.cpp" />
+		<Unit filename="fungus_net\common.cpp" />
+		<Unit filename="fungus_net\defs.cpp" />
+		<Unit filename="fungus_net\enet\callbacks.c">
+			<Option compilerVar="CC" />
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\callbacks.h">
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\compress.c">
+			<Option compilerVar="CC" />
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\enet.h">
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\host.c">
+			<Option compilerVar="CC" />
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\list.c">
+			<Option compilerVar="CC" />
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\list.h">
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\packet.c">
+			<Option compilerVar="CC" />
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\peer.c">
+			<Option compilerVar="CC" />
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\protocol.c">
+			<Option compilerVar="CC" />
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\protocol.h">
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\time.h">
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\types.h">
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\unix.c">
+			<Option compilerVar="CC" />
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\unix.h">
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\utility.h">
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\win32.c">
+			<Option compilerVar="CC" />
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\enet\win32.h">
+			<Option target="debug win32" />
+			<Option target="release win32" />
+		</Unit>
+		<Unit filename="fungus_net\fungus_net.h" />
+		<Unit filename="fungus_net\fungus_net_authenticator.h" />
+		<Unit filename="fungus_net\fungus_net_authenticator_internal.h" />
+		<Unit filename="fungus_net\fungus_net_c.h" />
+		<Unit filename="fungus_net\fungus_net_common.h" />
+		<Unit filename="fungus_net\fungus_net_defs.h" />
+		<Unit filename="fungus_net\fungus_net_defs_internal.h" />
+		<Unit filename="fungus_net\fungus_net_host.h" />
+		<Unit filename="fungus_net\fungus_net_host_internal.h" />
+		<Unit filename="fungus_net\fungus_net_message.h" />
+		<Unit filename="fungus_net\fungus_net_message_factory_manager.h" />
+		<Unit filename="fungus_net\fungus_net_message_intercept.h" />
+		<Unit filename="fungus_net\fungus_net_packet.h" />
+		<Unit filename="fungus_net\fungus_net_peer.h" />
+		<Unit filename="fungus_net\fungus_net_peer_internal.h" />
+		<Unit filename="fungus_net\fungus_net_unity.h" />
+		<Unit filename="fungus_net\fungus_net_unity_base.h" />
+		<Unit filename="fungus_net\fungus_net_unity_enet.h" />
+		<Unit filename="fungus_net\fungus_net_unity_memory.h" />
+		<Unit filename="fungus_net\host.cpp" />
+		<Unit filename="fungus_net\host_internal.cpp" />
+		<Unit filename="fungus_net\message.cpp" />
+		<Unit filename="fungus_net\message_intercept.cpp" />
+		<Unit filename="fungus_net\packet.cpp" />
+		<Unit filename="fungus_net\peer_base.cpp" />
+		<Unit filename="fungus_net\peer_concrete.cpp" />
+		<Unit filename="fungus_net\peer_group.cpp" />
+		<Unit filename="fungus_net\unity.cpp" />
+		<Unit filename="fungus_net\unity_base.cpp" />
+		<Unit filename="fungus_util\any.cpp" />
+		<Unit filename="fungus_util\bidirectional_container_base.cpp" />
+		<Unit filename="fungus_util\endian.cpp" />
+		<Unit filename="fungus_util\fs\fungus_util_fs.cpp" />
+		<Unit filename="fungus_util\fs\fungus_util_fs.h" />
+		<Unit filename="fungus_util\fungus_util.h" />
+		<Unit filename="fungus_util\fungus_util_any.h" />
+		<Unit filename="fungus_util\fungus_util_attribute_array_container.h" />
+		<Unit filename="fungus_util\fungus_util_bidirectional_container_base.h" />
+		<Unit filename="fungus_util\fungus_util_block_allocator.h" />
+		<Unit filename="fungus_util\fungus_util_cfg_file.cpp" />
+		<Unit filename="fungus_util\fungus_util_cfg_file.h" />
+		<Unit filename="fungus_util\fungus_util_clone_map.h" />
+		<Unit filename="fungus_util\fungus_util_common.h" />
+		<Unit filename="fungus_util\fungus_util_constexpr.h" />
+		<Unit filename="fungus_util\fungus_util_endian.h" />
+		<Unit filename="fungus_util\fungus_util_from_string.h" />
+		<Unit filename="fungus_util\fungus_util_hash_map.h" />
+		<Unit filename="fungus_util\fungus_util_make_string.h" />
+		<Unit filename="fungus_util\fungus_util_multi_tree.h" />
+		<Unit filename="fungus_util\fungus_util_optional.h" />
+		<Unit filename="fungus_util\fungus_util_pow2.h" />
+		<Unit filename="fungus_util\fungus_util_predicates.h" />
+		<Unit filename="fungus_util\fungus_util_prime.h" />
+		<Unit filename="fungus_util\fungus_util_sfinae.h" />
+		<Unit filename="fungus_util\fungus_util_std_ext.h" />
+		<Unit filename="fungus_util\fungus_util_string_op.cpp" />
+		<Unit filename="fungus_util\fungus_util_string_op.h" />
+		<Unit filename="fungus_util\fungus_util_timestamp.h" />
+		<Unit filename="fungus_util\fungus_util_type_info_wrap.h" />
+		<Unit filename="fungus_util\fungus_util_user.h" />
+		<Unit filename="fungus_util\thread\fungus_util_condition.h" />
+		<Unit filename="fungus_util\thread\fungus_util_mutex.h" />
+		<Unit filename="fungus_util\thread\fungus_util_thread.h" />
+		<Unit filename="fungus_util\thread\fungus_util_thread_common.h" />
+		<Unit filename="fungus_util\thread\thread.cpp" />
+		<Unit filename="fungus_util\timestamp.cpp" />
+		<Unit filename="version.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
