@@ -15,20 +15,19 @@ if(CMAKE_COMPILER_IS_GNUCXX)
 		set(CMAKE_CXX_FLAGS "-Wall -std=c++0x -O3")
 		set(CMAKE_EXE_LINKER_FLAGS "-s")
 	else (NDEBUG)
-		set(CMAKE_CXX_FLAGS "-g")
+		set(CMAKE_CXX_FLAGS "-g -std=c++0x -DFUNGUS_CONCURRENCY_NO_INLINE")
 	endif()
 endif()
 
 ADD_DEFINITIONS( -DBUILD_FUNGUSUTIL )
-
 ADD_DEFINITIONS( -DBUILD_FUNGUSCONCURRENCY )
 ADD_DEFINITIONS( -DBUILD_FUNGUSNET )
 
-if (BUILD_FUNGUSNET)
-	if (NOT BUILD_FUNGUSCONCURRENCY)
-		ADD_DEFINITIONS( -DBUILD_FUNGUSCONCURRENCY )
-	endif()
-endif()
+#if (BUILD_FUNGUSNET)
+#	if (NOT BUILD_FUNGUSCONCURRENCY)
+#		ADD_DEFINITIONS( -DBUILD_FUNGUSCONCURRENCY )
+#	endif()
+#endif()
 
 #SET(CMAKE_BUILD_TYPE  Debug)
 
@@ -74,4 +73,3 @@ include_directories( ${fungus_booster_SOURCE_DIR}/fungus_booster
 ###################
 
 subdirs( fungus_booster )
-#subdirs( examples )
