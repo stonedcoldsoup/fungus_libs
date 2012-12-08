@@ -50,7 +50,8 @@ namespace fungus_util
         FUNGUSUTIL_DEF_BINARY_OPERATOR_SUPPORT_CHECK(shift_left,  <<)
         FUNGUSUTIL_DEF_BINARY_OPERATOR_SUPPORT_CHECK(shift_right, >>)
 
-#ifdef FUNGUSUTIL_CPP11_PARTIAL
+// BROKEN as of GCC 4.7.x
+/*#ifdef FUNGUSUTIL_CPP11_PARTIAL
         namespace detail
         {
             struct no  {};
@@ -103,6 +104,15 @@ namespace fungus_util
         template<typename T>
         struct supports_istream_extraction:
         detail::__sise_impl::_impl<T> {};
+		
+		#define FUNGUSUTIL_USE_SFINAE \
+			using ::fungus_util::sfinae::detail::yes;						\
+			using ::fungus_util::sfinae::detail::no;						\
+			using ::fungus_util::sfinae::detail::__sosi_impl::defined;		\
+			using ::fungus_util::sfinae::detail::__sise_impl::defined;		\
+			using ::fungus_util::sfinae::detail::__sosi_impl::operator <<;	\
+			using ::fungus_util::sfinae::detail::__sise_impl::operator >>; \
+			
 #else
         template<typename T>
         struct supports_ostream_insertion
@@ -115,7 +125,66 @@ namespace fungus_util
         {
             static const bool value = true;
         };
-#endif
+#endif*/
+		namespace detail
+        {
+			// we use sizeof tricks instead.
+			namespace __sosi_impl
+			{
+				typedef char no;
+				typedef char yes[2];
+
+				struct any_t
+				{
+					template <typename T> any_t(T const &);
+				};
+
+				no operator <<(std::ostream const&, any_t const &);
+
+				yes &test(std::ostream &);
+				no test(no);
+
+				template <typename T>
+				struct _impl
+				{
+					static std::ostream &s;
+					static T const &t;
+					static bool const value = sizeof(test(s << t)) == sizeof(yes);
+				};
+			}
+			
+			namespace __sise_impl
+			{
+				typedef char no;
+				typedef char yes[2];
+
+				struct any_t
+				{
+					template <typename T> any_t(T const &);
+				};
+
+				no operator >>(std::istream const&, any_t const &);
+
+				yes &test(std::istream &);
+				no test(no);
+
+				template <typename T>
+				struct _impl
+				{
+					static std::istream &s;
+					static T const &t;
+					static bool const value = sizeof(test(s >> t)) == sizeof(yes);
+				};
+			}
+		}
+
+		template<typename T>
+        struct supports_ostream_insertion:
+        detail::__sosi_impl::_impl<T> {};
+
+        template<typename T>
+        struct supports_istream_extraction:
+        detail::__sise_impl::_impl<T> {};
     }
 }
 
