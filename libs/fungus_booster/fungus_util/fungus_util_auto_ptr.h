@@ -7,6 +7,7 @@ namespace fungus_util
 {
     using namespace fungus_util;
 
+    // depreciated: 12/06/12
     enum dereference_mode_e
     {
         dereference_mode_value,
@@ -221,7 +222,7 @@ namespace fungus_util
         }
     };
 
-    template <typename T>
+    /*template <typename T>
     static inline T operator *(const auto_ptr<T, dereference_mode_value> &p)
     {
         return p.value();
@@ -237,7 +238,7 @@ namespace fungus_util
     static inline const T &operator *(const auto_ptr<T, dereference_mode_ref> &p)
     {
         return p.ref();
-    }
+    }*/
 }
 
 #endif

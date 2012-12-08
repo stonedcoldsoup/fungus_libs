@@ -120,17 +120,23 @@ if(WIN32)
 endif(WIN32)
 
 if (DLL_FUNGUSUTIL OR SO_FUNGUSUTIL)
+	
 	add_library( fungus_booster SHARED
 		 ${FUNGUS_BOOSTER_FILES}
 		)
+		
 	if(UNIX)
 		target_link_libraries( fungus_booster -lenet )
 	elseif(WIN32)
 		target_link_libraries( fungus_booster -luser32 -lws2_32 -lwinmm )
 	endif()
+
 else (DLL_FUNGUSUTIL OR SO_FUNGUSUTIL)
 	add_library( fungus_booster STATIC
 		 ${FUNGUS_BOOSTER_FILES}
 		)
 endif()
+
+set_target_properties(fungus_booster PROPERTIES LINK_FLAGS_RELEASE -s )
+set_target_properties(fungus_booster PROPERTIES DEBUG_POSTFIX "_d" )
 

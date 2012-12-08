@@ -502,6 +502,9 @@ namespace fungus_net
         default:
             fungus_util_assert(false,
                 "packet::aggregator::aggregate::get_serializer(): unknown stream mode!\n");
+				
+			// keep the compiler happy.
+			return unseq->get();
             break;
         };
     }

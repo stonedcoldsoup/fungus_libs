@@ -11,23 +11,25 @@
 #	include <mmsystem.h>
 #   include <winsock.h> // timeval is defined in here.
 
-/* FILETIME of Jan 1 1970 00:00:00. */
-//static const unsigned __int64 epoch = UINT64CONST(116444736000000000);
-static const unsigned __int64 epoch = 11644473600000000ULL;
+#ifndef FUNGUSUTIL_HAVE_gettimeofday
+    /* FILETIME of Jan 1 1970 00:00:00. */
+    //static const unsigned __int64 epoch = UINT64CONST(116444736000000000);
+    static const unsigned __int64 epoch = 11644473600000000ULL;
 
-struct timezone
-{
-    int  tz_minuteswest; /* minutes W of Greenwich */
-    int  tz_dsttime;     /* type of dst correction */
-};
+    struct timezone
+    {
+        int  tz_minuteswest; /* minutes W of Greenwich */
+        int  tz_dsttime;     /* type of dst correction */
+    };
 
-/*
- * timezone information is stored outside the kernel so tzp isn't used anymore.
- *
- * Note: this function is not for Win32 high precision timing purpose. See
- * elapsed_time().
- */
-FUNGUSUTIL_API int gettimeofday(struct timeval *tp, struct timezone *tzp);
+    /*
+     * timezone information is stored outside the kernel so tzp isn't used anymore.
+     *
+     * Note: this function is not for Win32 high precision timing purpose. See
+     * elapsed_time().
+     */
+    FUNGUSUTIL_API int gettimeofday(struct timeval *tp, struct timezone *tzp);
+#endif
 #else
 #   include <sys/time.h>
 #endif
