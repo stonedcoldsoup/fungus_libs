@@ -48,7 +48,7 @@
 #ifndef FUNGUSUTIL_PLATFORM_DEFINED
     #if defined(_WIN32) || defined(__WIN32__) || defined(__WINDOWS__) || defined(WIN32)
         #define FUNGUSUTIL_WIN32
-    #else
+    #elif defined(__linux__) || defined(__linux)
         #define FUNGUSUTIL_POSIX
     #endif
     #define FUNGUSUTIL_PLATFORM_DEFINED
