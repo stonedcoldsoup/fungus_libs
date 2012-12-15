@@ -35,6 +35,7 @@ set( FUNGUS_BOOSTER_FILES
 	fungus_util/fungus_util_timestamp.h
 	fungus_util/fungus_util_type_info_wrap.h
 	fungus_util/fungus_util_user.h
+	fungus_util/fungus_util_publisher_subscriber.h
 	fungus_util/timestamp.cpp
 	fungus_util/thread/fungus_util_condition.h
 	fungus_util/thread/fungus_util_mutex.h

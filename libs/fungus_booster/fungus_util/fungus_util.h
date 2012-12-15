@@ -14,6 +14,7 @@
 #include "fungus_util_user.h"
 #include "fungus_util_cfg_file.h"
 #include "fungus_util_string_op.h"
+#include "fungus_util_publisher_subscriber.h"
 
 // attribute containers
 #include "fungus_util_attribute_array_container.h"
