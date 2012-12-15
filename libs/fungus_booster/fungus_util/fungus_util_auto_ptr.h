@@ -40,6 +40,8 @@ namespace fungus_util
             {
                 return object;
             }
+            
+            inline int get_nrefs() const {return nrefs;}
 
             inline container *grab()
             {
@@ -145,6 +147,14 @@ namespace fungus_util
         ~auto_ptr()
         {
             drop();
+        }
+        
+        inline int nrefs()
+        {
+            if (c)
+                return c->get_nrefs();
+            else
+                return 0;
         }
 
         inline auto_ptr &operator =(T *p)
